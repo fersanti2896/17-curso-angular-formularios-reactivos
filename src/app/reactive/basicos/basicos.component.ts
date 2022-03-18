@@ -16,11 +16,20 @@ export class BasicosComponent {
 
   /* Forma de no hacer tantos FormControl */
   miFormulario: FormGroup = this.formBuilder.group({
-    nombre     : [ 'Memoria RAM', [ Validators.required, Validators.minLength(3) ] ],
-    precio     : [ 1000, [ Validators.required, Validators.min(0) ] ],
-    existencias: [ 5, [ Validators.required, Validators.min(0) ] ]
+    nombre     : [ '', [ Validators.required, Validators.minLength(3) ] ],
+    precio     : [ 0, [ Validators.required, Validators.min(0) ] ],
+    existencias: [ 0, [ Validators.required, Validators.min(0) ] ]
   });
 
   /* Inyectando el servicio de FormBuilder */
   constructor(private formBuilder: FormBuilder) { }
+
+  campoValido(campo: string) {
+    return this.miFormulario.controls[campo].errors 
+           && this.miFormulario.controls[campo].touched
+  }
+
+  valor() {
+    return this.miFormulario.controls.precio.errors?.min?.actual
+  }
 }
