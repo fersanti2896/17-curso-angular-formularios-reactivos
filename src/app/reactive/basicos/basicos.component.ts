@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basicos',
@@ -16,9 +16,9 @@ export class BasicosComponent {
 
   /* Forma de no hacer tantos FormControl */
   miFormulario: FormGroup = this.formBuilder.group({
-    nombre: ['Memoria RAM'],
-    precio: [ 1000 ],
-    existencias: [ 5 ]
+    nombre     : [ 'Memoria RAM', [ Validators.required, Validators.minLength(3) ] ],
+    precio     : [ 1000, [ Validators.required, Validators.min(0) ] ],
+    existencias: [ 5, [ Validators.required, Validators.min(0) ] ]
   });
 
   /* Inyectando el servicio de FormBuilder */
