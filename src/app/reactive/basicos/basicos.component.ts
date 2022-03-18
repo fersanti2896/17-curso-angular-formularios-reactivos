@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-basicos',
@@ -8,9 +8,19 @@ import { FormControl, FormGroup } from '@angular/forms';
   ]
 })
 export class BasicosComponent {
-  miFormulario: FormGroup = new FormGroup ({
-    'nombre': new FormControl('Memoria RAM')  
+  /* miFormulario: FormGroup = new FormGroup ({
+    'nombre'     : new FormControl('Memoria RAM') ,
+    'precio'     : new FormControl(0) ,
+    'existencias': new FormControl(5)  
+  }); */
+
+  /* Forma de no hacer tantos FormControl */
+  miFormulario: FormGroup = this.formBuilder.group({
+    nombre: ['Memoria RAM'],
+    precio: [ 1000 ],
+    existencias: [ 5 ]
   });
 
-  constructor() { }
+  /* Inyectando el servicio de FormBuilder */
+  constructor(private formBuilder: FormBuilder) { }
 }
