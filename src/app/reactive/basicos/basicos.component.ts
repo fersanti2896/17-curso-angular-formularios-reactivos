@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styles: [
   ]
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit {
   /* miFormulario: FormGroup = new FormGroup ({
     'nombre'     : new FormControl('Memoria RAM') ,
     'precio'     : new FormControl(0) ,
@@ -16,9 +16,9 @@ export class BasicosComponent {
 
   /* Forma de no hacer tantos FormControl */
   miFormulario: FormGroup = this.formBuilder.group({
-    nombre     : [ '', [ Validators.required, Validators.minLength(3) ] ],
-    precio     : [ 0, [ Validators.required, Validators.min(0) ] ],
-    existencias: [ 0, [ Validators.required, Validators.min(0) ] ]
+    nombre     : [ , [ Validators.required, Validators.minLength(3) ] ],
+    precio     : [ , [ Validators.required, Validators.min(0) ] ],
+    existencias: [ , [ Validators.required, Validators.min(0) ] ]
   });
 
   /* Inyectando el servicio de FormBuilder */
@@ -29,7 +29,27 @@ export class BasicosComponent {
            && this.miFormulario.controls[campo].touched
   }
 
+  ngOnInit() {
+    /* Estableciendo valores al formulario */
+    this.miFormulario.reset({
+      nombre     : 'Memoria RAM', 
+      precio     : 800,
+      existencias: 15
+    })
+  }
+
   valor() {
     return this.miFormulario.controls.precio.errors?.min?.actual
+  }
+  
+  guardar() {
+    if(this.miFormulario.invalid) {
+      /* Mostrando mensajes de error si se aprieta el boton sin tocar los input */
+      this.miFormulario.markAllAsTouched();
+      return;
+    }
+
+    /* Resetea todos los input después de dar submit */
+    this.miFormulario.reset();
   }
 }
