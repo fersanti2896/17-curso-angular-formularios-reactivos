@@ -29,10 +29,12 @@
                 <input  type="text"
                         class="form-control"
                         placeholder="Agregar favorito"
-                        (keyup.enter)="1">
+                        [formControl]="nuevoFavorito"
+                        (keyup.enter)="agregarFavorito()">
 
                 <button class="btn btn-outline-primary" 
-                        type="button">
+                        type="button"
+                        (click)="agregarFavorito()">
                         <i class="bi bi-check-lg"></i>
                         Agregar
                 </button>
@@ -82,10 +84,10 @@
         <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre> 
 
-        <span>Touched</span>
-        <pre>{{ miFormulario.touched | json }}</pre>
-
         <span>Nombre</span>
         <pre>{{ miFormulario.controls.nombre.errors | json }}</pre>
+
+        <span>Agregar Juego</span>
+        <pre>{{ nuevoFavorito.value }}</pre>
     </div>
 </div>
