@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -10,8 +10,17 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class DinamicosComponent {
 
   miFormulario: FormGroup = this.formBuilder.group({
-    nombre: [ , [ Validators.required, Validators.minLength(3) ] ]
+    nombre: [ , [ Validators.required, Validators.minLength(3) ] ],
+    favoritos: this.formBuilder.array( [
+      /* Colecciones de FormControl */
+      [ 'Mario Party 2', Validators.required ], 
+      [ 'Nintendo 64', Validators.required ]
+    ], Validators.required )
   });
+
+  get favoritosArr() {
+    return this.miFormulario.get('favoritos') as FormArray;
+  }
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -28,8 +37,8 @@ export class DinamicosComponent {
     }
 
     console.log(this.miFormulario.value);
-    
+
     /* Resetea todos los input después de dar submit */
-    this.miFormulario.reset();
+    // this.miFormulario.reset();
   }
 }
