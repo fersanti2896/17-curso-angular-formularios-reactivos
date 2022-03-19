@@ -2,7 +2,7 @@
 <h2>Reactive: Switches</h2>
 <hr>
 
-<form [formGroup]="miFormulario">
+<form [formGroup]="miFormulario" (submit)="guardar()">
     <!-- Radio -->
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Género</label>
@@ -69,7 +69,8 @@
     <!-- Boton submit -->
     <div class="row">
         <div class="col">
-            <button class="btn btn-outline-primary float-end">
+            <button class="btn btn-outline-primary float-end"
+                    type="submit">
                 <i class="bi bi-save"></i>
                 Guardar
             </button>
