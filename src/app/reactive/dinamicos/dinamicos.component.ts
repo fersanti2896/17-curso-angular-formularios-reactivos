@@ -38,8 +38,12 @@ export class DinamicosComponent {
 
     this.favoritosArr.push( this.formBuilder.control(this.nuevoFavorito.value, Validators.required) );
     // this.favoritosArr.push( new FormControl( this.nuevoFavorito.value, Validators.required ) )
-    
+
     this.nuevoFavorito.reset();
+  }
+
+  borrarFavorito(index: number) {
+    this.favoritosArr.removeAt(index);
   }
 
   guardar() {
